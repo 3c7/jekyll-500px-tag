@@ -4,7 +4,7 @@
 # Description:
 # Insert an image hosted via 500px using liquid tags
 # Example:
-# {% fhp 47564676 %}
+# {% 500px 47564676 %}
 # This will display my photo 'La Trappa'
 
 require 'net/https'
