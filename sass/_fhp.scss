@@ -1,0 +1,20 @@
+.icon-exif {
+	color: $color-gray01;
+	&:before {
+		font: 1.3em $font-icon;
+		line-height: 1.6em;
+		content: "\f030";
+		margin-right: 3px;
+	}
+}
+.fhp-exif-wrapper {
+	color: $color-gray02;
+	border-radius: 15px;
+	vertical-align: middle;
+	text-align: center;
+	height: 3em;
+	transition: all 1s ease;
+	&:hover {
+		color: $color-gray01;
+	}
+}

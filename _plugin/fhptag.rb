@@ -31,28 +31,34 @@ module Jekyll
 		end
 
 		def render(context)
-			html = '<div class="#{@config['wrapper_class']}">'
-			html << '<a href="http://500px.com/photo/#{@set}">'
-			html << '<img src="#{photo.image_url}">'
-			html << '</a>'
-			html << '<div class="fhp-exif-wrapper"><p class="fhp-exif"><span class="icon-exif"">Exif: </span>#{photo.focal_length}mm - ISO #{photo.iso} - #{photo.shutter_speed}s - f/#{photo.aperture}</p></div>'
-			#html << '<#{@config['description_wrapper_tag']} class="#{@config['description_wrapper_class']}">'
-			#html << '<h4>#{photo.title}</h4>'
-			#html << '<#{@config['description_tag']} class="#{@config['description_class']}">'
-			#html << '#{photo.description}'
-			#html << '</#{@config['description_tag']}>'
-			#html << '</#{@config['description_wrapper_tag']}>'
-			html << '</div>'
+			if @config['consumer_key'] != 'null' && photo.status != '403' && photo.status != ''
+				html = "<div class=\"#{@config['wrapper_class']}\">"
+				# -> Lightbox html << "<a href=\"http://500px.com/photo/#{@set}\">"
+				html << "<img src=\"#{photo.image_url}\">"
+				# -> Lightbox html << "</a>"
+				html << "<div class=\"fhp-exif-wrapper\"><p class=\"fhp-exif\"><span class=\"icon-exif\"></span> Exif: #{photo.focal_length}mm - ISO #{photo.iso} - #{photo.shutter_speed}s - f/#{photo.aperture} - <a href=\"http://500px.com/photo/#{@set}\">Goto 500px.com</a></p></div>"
+			 	#html << '<#{@config['description_wrapper_tag']} class="#{@config['description_wrapper_class']}">'
+				#html << '<h4>#{photo.title}</h4>'
+				#html << '<#{@config['description_tag']} class="#{@config['description_class']}">'
+				#html << '#{photo.description}'
+				#html << '</#{@config['description_tag']}>'
+				#html << '</#{@config['description_wrapper_tag']}>'
+				html << "</div>"
+			elsif photo.status == '403'
+				html = "Error 403 while querying 500px.com. Wrong Consumer Key."
+			else
+				html = "Unknown Error."
+			end
 			return html
 		end
 
 		def photo
 			request = JSON.parse(json)
-			@photo = photo.new(request['id'], request['title'], request['description'], request['focal_length'], request['iso'], request['shutter_speed'], request['aperture'], request['image_url'])
+			@photo = Photo.new(request['photo']['id'], request['photo']['name'], request['photo']['description'], request['photo']['focal_length'], request['photo']['iso'], request['photo']['shutter_speed'], request['photo']['aperture'], request['photo']['image_url'], request['photo']['status'])
 		end
 
 		def json
-			uri = URI.parse('https://api.500px.com/v1/photos/#{@set}?image_size=#{@config['image_size']}&consumer_key=#{@config['consumer_key']}')
+			uri = URI.parse("https://api.500px.com/v1/photos/#{@set}?image_size=#{@config['image_size']}&consumer_key=#{@config['consumer_key']}")
 			http = Net::HTTP.new(uri.host, uri.port)
 			http.use_ssl = true
 			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -60,16 +66,17 @@ module Jekyll
 		end
 	end
 
-	class photo
-		def initialize(id, title, description, focal_length, iso, shutter_speed, aperture, image_url)
-			@id				= id
-			@title 			= title
-			@description 	= description
-			@focal_length 	= focal_length
-			@iso 			= iso
-			@shutter_speed 	= shutter_speed
-			@aperture 		= aperture
-			@image_url		= image_url
+	class Photo
+		def initialize(id, title, description, focal_length, iso, shutter_speed, aperture, image_url, status)
+			@id	= id
+			@title = title
+			@description = description
+			@focal_length = focal_length
+			@iso = iso
+			@shutter_speed = shutter_speed
+			@aperture = aperture
+			@image_url = image_url
+			@status = status
 		end
 
 		def title
@@ -99,7 +106,11 @@ module Jekyll
 		def image_url
 			return @image_url
 		end
+
+		def status
+			return @status
+		end
 	end
 end
 
-Liquid::Template.register_tag('fhp', Jekyll::FhpTag)
+Liquid::Template.register_tag('500px', Jekyll::FhpTag)
