@@ -36,7 +36,7 @@ module Jekyll
 				# -> Lightbox html << "<a href=\"http://500px.com/photo/#{@set}\">"
 				html << "<img src=\"#{photo.image_url}\">"
 				# -> Lightbox html << "</a>"
-				html << "<div class=\"fhp-exif-wrapper\"><p class=\"fhp-exif\"><span class=\"icon-exif\"></span> Exif: #{photo.focal_length}mm - ISO #{photo.iso} - #{photo.shutter_speed}s - f/#{photo.aperture} - <a href=\"http://500px.com/photo/#{@set}\">Goto 500px.com</a></p></div>"
+				html << "<div class=\"fhp-exif-wrapper\"><span class=\"icon-exif\">Exif</span><div class=\"fhp-exif-data\"><p class=\"fhp-exif\">#{photo.focal_length}mm - ISO #{photo.iso} - #{photo.shutter_speed}s - f/#{photo.aperture} - <a href=\"http://500px.com/photo/#{@set}\">Goto 500px.com</a></p></div></div>"
 			 	#html << '<#{@config['description_wrapper_tag']} class="#{@config['description_wrapper_class']}">'
 				#html << '<h4>#{photo.title}</h4>'
 				#html << '<#{@config['description_tag']} class="#{@config['description_class']}">'

@@ -1,5 +1,11 @@
+$fhd-bordercolor: $color-gray02;
+$fhd-fontcolor: $color-gray01;
+$fhd-fontcolor-light: $color-gray02;
+
 .icon-exif {
-	color: $color-gray01;
+	color: $fhd-fontcolor;
+	border-bottom:.1em dotted $fhd-bordercolor;
+	cursor: help;
 	&:before {
 		font: 1.3em $font-icon;
 		line-height: 1.6em;
@@ -7,14 +13,26 @@
 		margin-right: 3px;
 	}
 }
+
+.fhp-wrapper {
+	width: 500px;
+	text-align: center;
+	img {
+		width: 500px;
+		height: auto;
+	}
+}
+
 .fhp-exif-wrapper {
-	color: $color-gray02;
-	border-radius: 15px;
+	color: $fhd-fontcolor-light;
+	border-radius: 0 0 15px 15px;
 	vertical-align: middle;
 	text-align: center;
-	height: 3em;
+	height: 30px;
+	overflow: hidden;
 	transition: all 1s ease;
 	&:hover {
-		color: $color-gray01;
+		color: $fhd-fontcolor;
+		height:68px;
 	}
 }
