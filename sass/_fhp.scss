@@ -36,3 +36,28 @@ $fhd-fontcolor-light: $color-gray02;
 		height:68px;
 	}
 }
+
+@media screen and (max-width: 600px) {
+	.fhp-wrapper {
+		width: 400px;
+		img {
+			width: 400px;
+			height: auto;
+		}
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.fhp-wrapper {
+		width: 200px;
+		img {
+			width: 200px;
+			height: auto;
+		}
+	}
+	.fhp-exif-wrapper {
+		&:hover {
+			height: 75px;
+		}
+	}
+}

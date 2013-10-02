@@ -1,6 +1,10 @@
 Jekyll 500px Tag
 ================
-Insert 500px.com pictures via liquid tags
+Insert 500px.com pictures via liquid tags. This plugin is based on [macjasp's](https://github.com/macjasp) flickr plugin and [henninghoyer's](https://github.com/henninghoyer) 500px Image Set plugin.   
+
+##Changes
+-added some responsive features
+-changed the exif info under the pictures
 
 ##Usage
 {% 500px photoid %}   
