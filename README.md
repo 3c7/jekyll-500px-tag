@@ -8,7 +8,7 @@ Insert 500px.com pictures via liquid tags. This plugin is based on [macjasp's](h
 
 ##Usage
 {% 500px photoid %}   
-Preview at [3c7.github.io](http://3c7.github.io).  
+Preview at [3c7.github.io](http://3c7.github.io/jekyll-500px-plugin-ready-to-use/).  
 
 ##Installation
 Copy the ruby file under _plugin into your plugins/ directory. The sass file is an example of how to use the classes.
